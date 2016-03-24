@@ -3,6 +3,7 @@ package com.reus;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.orm.jpa.EntityScan;
@@ -47,5 +48,15 @@ public class SpringBootDemo
     public String home(){
     	System.out.println(dataSourceConfig.getDriverClassName());
     	return dataSourceConfig.toString();
+    }
+    /**
+     * 使用@Value动态使用application中的值
+     */
+    @Value("${server.port}")
+    private String port;
+    
+    @RequestMapping("/port")
+    public String port(){
+    	return port;
     }
 }
