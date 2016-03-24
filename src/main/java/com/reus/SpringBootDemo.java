@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.reus.config.DataSourceConfig;
 import com.reus.model.User;
 import com.reus.repository.UserRepository;
 
+@ComponentScan
 @RestController
 @EnableAutoConfiguration
 public class SpringBootDemo 
@@ -38,9 +40,12 @@ public class SpringBootDemo
 		return (List<User>) repository.findAll();
 	}
     
+	@Autowired
+	private DataSourceConfig dataSourceConfig;
     
     @RequestMapping("/")
     public String home(){
-    	return "Hello!";
+    	System.out.println(dataSourceConfig.getDriverClassName());
+    	return dataSourceConfig.toString();
     }
 }
